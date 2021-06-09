@@ -1,5 +1,16 @@
 function View(canvas) {
 	this.canvas = canvas;
+	this.clicks = []; // add mouse clicks to an array
+}
+
+View.prototype.handleClick = function(event) {
+	console.log(this);
+	var view = this;
+	var x = event.offsetX;
+	var y = event.offsetY;
+
+	var pos = view.clicks.push({x: x, y: y, radius: 100});
+	console.log("Add a circle at", x, ", ", y);
 }
 
 View.prototype.updateDisplay = function() {
@@ -10,7 +21,7 @@ View.prototype.updateDisplay = function() {
 	context.fillRect(0, 0, view.canvas.width, view.canvas.height); // set background to cover canvas area
     // context.strokeStyle = "orange";
     // context.strokeRect(canvas.width-110, canvas.height-110, 100, 100)
-	view.drawCircle(context, 150, 150, 100, 1);
+	// view.drawCircle(context, 150, 150, 100, 1);
 };
 
 View.prototype.drawCircle = function(context, x, y, radius, alpha) {
