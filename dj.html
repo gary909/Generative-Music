@@ -15,7 +15,8 @@
         };
         var controller = {
             start: function() {
-                setInterval(function() {dj.playsound(); }, 1000);
+                //setInterval(function() {dj.playsound(); }, 1000);
+                setInterval(dj.playsound.bind(dj), 1000);
             }
         };
         window.onload = function() {
