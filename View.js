@@ -1,6 +1,7 @@
 function View(canvas) {
 	this.canvas = canvas;
 	this.clicks = []; // add mouse clicks to an array
+	this.frameRate = 1000 / 30; // Gives us 33fps
 }
 
 View.prototype.handleClick = function(event) {
@@ -22,6 +23,10 @@ View.prototype.updateDisplay = function() {
     // context.strokeStyle = "orange";
     // context.strokeRect(canvas.width-110, canvas.height-110, 100, 100)
 	// view.drawCircle(context, 150, 150, 100, 1);
+	for (var i = 0; i < view.clicks.length; i++) {
+		var circle = view.clicks[i];
+		view.drawCircle(context, circle.x, circle.y, circle.radius, 1);
+	}
 };
 
 View.prototype.drawCircle = function(context, x, y, radius, alpha) {
