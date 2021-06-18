@@ -11,7 +11,7 @@ View.prototype.handleClick = function(event) {
 	var x = event.offsetX;
 	var y = event.offsetY;
 
-	var pos = view.clicks.push({x: x, y: y, radius: 100});
+	var pos = view.clicks.push({x: x, y: y, radius: 0});
 	console.log("Add a circle at", x + ", " + y);
 }
 
@@ -26,7 +26,11 @@ View.prototype.updateDisplay = function() {
 	// view.drawCircle(context, 150, 150, 100, 1);
 	for (var i = 0; i < view.clicks.length; i++) {
 		var circle = view.clicks[i];
-		if (circle.radius >  (view.maxRadius - 15)) {
+		if (circle.radius >  view.maxRadius) continue;
+		circle.radius += 1;
+		
+		var alpha = .7;
+		if (circle.radius >  (view.maxRadius - 5)) {
 			alpha = (view.maxRadius - circle.radius) / 10;
 		}
 
