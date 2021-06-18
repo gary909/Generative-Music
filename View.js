@@ -2,6 +2,7 @@ function View(canvas) {
 	this.canvas = canvas;
 	this.clicks = []; // add mouse clicks to an array
 	this.frameRate = 1000 / 30; // Gives us 33fps
+	this.maxRadius = 80;
 }
 
 View.prototype.handleClick = function(event) {
@@ -25,7 +26,11 @@ View.prototype.updateDisplay = function() {
 	// view.drawCircle(context, 150, 150, 100, 1);
 	for (var i = 0; i < view.clicks.length; i++) {
 		var circle = view.clicks[i];
-		view.drawCircle(context, circle.x, circle.y, circle.radius, 1);
+		if (circle.radius >  (view.maxRadius - 15)) {
+			alpha = (view.maxRadius - circle.radius) / 10;
+		}
+
+		view.drawCircle(context, circle.x, circle.y, circle.radius, alpha);
 	}
 };
 
