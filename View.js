@@ -2,6 +2,7 @@ function View(canvas) {
 	this.canvas = canvas;
 	this.clicks = []; // add mouse clicks to an array
 	this.frameRate = 1000 / 30; // Gives us 33fps
+	this.loopRate = 4000;
 	this.maxRadius = 80;
 }
 
@@ -13,7 +14,11 @@ View.prototype.handleClick = function(event) {
 
 	var pos = view.clicks.push({x: x, y: y, radius: 0});
 	console.log("Add a circle at", x + ", " + y);
-}
+
+	setInterval(function() {
+		view.clicks[pos-1].radius= 0;
+	}, view.loopRate);
+};
 
 View.prototype.updateDisplay = function() {
 	var view = this;
