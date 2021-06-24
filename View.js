@@ -40,7 +40,8 @@ View.prototype.updateDisplay = function() {
 			alpha = (view.maxRadius - circle.radius) / 10;
 		}
 
-		view.drawCircle(context, circle.x, circle.y, circle.radius, alpha);
+		//view.drawCircle(context, circle.x, circle.y, circle.radius, alpha); // Use this code to draw circles
+		view.drawFlower(context, circle.x, circle.y, circle.radius, alpha); // Use this code to draw flowers
 	}
 };
 
@@ -49,4 +50,22 @@ View.prototype.drawCircle = function(context, x, y, radius, alpha) {
 	context.arc(x, y, radius, 0, 2*Math.PI);
 	context.fillStyle = "rgba(" + x%256 + ", " + y%256 + ", " + (x * y % 256) + " ," + alpha + ")";
 	context.fill();
+}
+
+View.prototype.drawFlower = function(context, x, y, size, alpha) {
+	var degrees = 36;
+
+	context.save();
+	context.translate(x, y);
+	context.fillStyle = "rgba(" + x%256 + ", " + y%256 + ", " + (x * y % 256)+ " ," + alpha + ")";
+
+	for (var i = 0; i < 360/degrees; i++) {
+		context.fillRect(0, 0, size, size);
+		context.rotate(degreesToRadians(degrees));
+	}
+	context.restore();
+}
+
+function degreesToRadians(degrees) {
+	return (degrees * Math.PI) /180;
 }
